@@ -5,7 +5,7 @@
 //  Created by JM_Reddy on 23/10/25.
 //
 
-import Foundation
+import UIKit
 @MainActor
 public protocol JMVideoPlayerProtocol: AnyObject {
     var isVideoStrated: ((Bool) -> Void)? { get set }
