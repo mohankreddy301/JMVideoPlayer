@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+@MainActor
 public protocol JMVideoPlayerProtocol: AnyObject {
     var isVideoStrated: ((Bool) -> Void)? { get set }
     var playerRate: Float { get }

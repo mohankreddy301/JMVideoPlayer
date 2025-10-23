@@ -12,7 +12,7 @@ import AVKit
 #if canImport(UIKit)
 import UIKit
 
-
+@MainActor
 public class JMVideoPlayerView:NSObject,JMVideoPlayerProtocol {
     private var playerViewController = AVPlayerViewController()
     private let avplayer = AVPlayer()
