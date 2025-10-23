@@ -47,20 +47,24 @@ public class JMVideoPlayerView:NSObject,JMVideoPlayerProtocol {
         
     }
     
-    public override func observeValue(forKeyPath keyPath: String?,
-                                      of object: Any?,
-                                      change: [NSKeyValueChangeKey : Any]?,
-                                      context: UnsafeMutableRawPointer?) {
+     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "timeControlStatus" {
             if avplayer.timeControlStatus == .playing {
                 print("🎬 Video actually started playing")
-                isVideoStrated?(true)
+                // Execute the closure on the main actor.
+                Task { @MainActor in
+                    self.isVideoStrated?(true)
+                }
             } else if avplayer.timeControlStatus == .paused {
                 print("⏸️ Video paused")
-                isVideoStrated?(false)
+                // Execute the closure on the main actor.
+                Task { @MainActor in
+                    self.isVideoStrated?(false)
+                }
             }
         }
     }
+    
     public func startVideo(url: URL) {
         let playerItem = AVPlayerItem(url: url)
         avplayer.replaceCurrentItem(with: playerItem)
